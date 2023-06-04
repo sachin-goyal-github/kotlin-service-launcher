@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: launcher
+  labels:
+    app: launcher
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: launcher
+  template:
+    metadata:
+      labels:
+        app: launcher
+    spec:
+      containers:
+        - name: launcher
+          image: sachingoyaldocker/sachin-goyal-github-launcher:latest
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DATABASE_HOST
+              value: "launcher-db"
+            - name: DATABASE_PORT
+              value: "3306"
+            - name: DATABASE_NAME
+              value: "launcher"
+            - name: DATABASE_USER
+              value: "launcher"
+            - name: DATABASE_PASSWORD
+              value: "password"
+            - name: DATABASE_INITIALIZATION_MODE
+              value: "always"
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: "Always"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: launcher
+  labels:
+    app: launcher
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: launcher
+  type: ClusterIP

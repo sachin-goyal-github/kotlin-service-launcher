@@ -1,4 +1,4 @@
-package com.sg.launcher
+package com.sg.launcher.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

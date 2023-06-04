@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: launcher-db
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: launcher-db
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: launcher-db
+spec:
+  selector:
+    matchLabels:
+      app: launcher-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: launcher-db
+    spec:
+      containers:
+        - image: biarms/mysql:5.7
+          name: launcher-db
+          env:
+            # Use secret in real usage
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: MYSQL_DATABASE
+              value: launcher
+            - name: MYSQL_USER
+              value: launcher
+            - name: MYSQL_PASSWORD
+              value: password
+          ports:
+            - containerPort: 3306
+              name: launcher-db
+          imagePullPolicy: "Always"
+          volumeMounts:
+            - name: launcher-db-persistent-storage
+              mountPath: /var/lib/launcher-db
+      volumes:
+        - name: launcher-db-persistent-storage
+          persistentVolumeClaim:
+            claimName: launcher-db-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: launcher-db-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: launcher-db-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

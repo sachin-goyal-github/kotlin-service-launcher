@@ -1,23 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'org.jetbrains.kotlin.jvm' version '1.8.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.8.21'
 }
 
-group = 'com.sg'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+targetCompatibility = '17'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 ext {
     commonsLang3Version = '3.4'
-    mySQLConnectorVersion = '8.0.28'
+    mySQLConnectorVersion = '8.0.33'
     junitVersion = '4.13.1'
     springFoxVersion = '3.0.0'
 }
