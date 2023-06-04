@@ -15,13 +15,31 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    commonsLang3Version = '3.4'
+    mySQLConnectorVersion = '8.0.28'
+    junitVersion = '4.13.1'
+    springFoxVersion = '3.0.0'
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
+
+    implementation "org.apache.commons:commons-lang3:${project.commonsLang3Version}"
+    implementation "mysql:mysql-connector-java:${project.mySQLConnectorVersion}"
+
+    implementation "io.springfox:springfox-swagger2:${project.springFoxVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${project.springFoxVersion}"
+
     runtimeOnly 'com.h2database:h2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "junit:junit:${project.junitVersion}"
 }
 
 tasks.withType(KotlinCompile) {
