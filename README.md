@@ -20,6 +20,7 @@ minikube start
 ```
 
 ## Rebuild and Push to Docker Hub
+[Optional] Only if you are developing code
 ```
 ./rebuildAndPush.sh
 ```
