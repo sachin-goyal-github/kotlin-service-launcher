@@ -8,6 +8,5 @@ spring:
     connectionProperties: useUnicode=true;characterEncoding=utf-8
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
-
 server:
   port: ${SERVER_PORT}

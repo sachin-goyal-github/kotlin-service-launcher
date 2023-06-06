@@ -20,7 +20,7 @@ ext {
     commonsLang3Version = '3.4'
     mySQLConnectorVersion = '8.0.33'
     junitVersion = '4.13.1'
-    springFoxVersion = '3.0.0'
+    springDocVersion = '1.7.0'
 }
 
 dependencies {
@@ -34,10 +34,7 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${project.commonsLang3Version}"
     implementation "mysql:mysql-connector-java:${project.mySQLConnectorVersion}"
 
-    implementation "io.springfox:springfox-swagger2:${project.springFoxVersion}"
-    implementation "io.springfox:springfox-swagger-ui:${project.springFoxVersion}"
-
-    runtimeOnly 'com.h2database:h2'
+    implementation "org.springdoc:springdoc-openapi-ui:${project.springDocVersion}"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "junit:junit:${project.junitVersion}"
