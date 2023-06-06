@@ -39,7 +39,7 @@ minikube start
 kubectl port-forward service/launcher 8081:8080 --namespace=launcher
 ```
 
-## API Playground (Swagger)
+## API Playground (Open API)
 After port forwarding
 ```
 http://localhost:8081/swagger-ui.html
