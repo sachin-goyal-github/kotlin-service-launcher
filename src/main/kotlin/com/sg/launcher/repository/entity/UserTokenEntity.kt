@@ -5,15 +5,15 @@ import javax.persistence.*
 @Entity
 @Table(name = "user_token")
 class UserTokenEntity {
-    @get:Column(name = "id")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @get:Column(name = "user_id")
+    @Column(name = "user_id")
     var userId: Long? = null
 
-    @get:Column(name = "user_token")
+    @Column(name = "user_token")
     var userToken: String? = null
 
     constructor()

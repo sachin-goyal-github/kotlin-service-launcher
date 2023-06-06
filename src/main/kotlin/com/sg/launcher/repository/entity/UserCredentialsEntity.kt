@@ -6,21 +6,21 @@ import javax.persistence.*
 @Entity
 @Table(name = "user_credentials")
 class UserCredentialsEntity {
-    @get:Column(name = "id")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @get:Column(name = "user_id")
+    @Column(name = "user_id")
     var userId: Long? = null
 
-    @get:Column(name = "user_name")
+    @Column(name = "user_name")
     var userName: String? = null
 
-    @get:Column(name = "salt")
+    @Column(name = "salt")
     var salt: ByteArray? = null
 
-    @get:Column(name = "password_hash")
+    @Column(name = "password_hash")
     var passwordHash: ByteArray? = null
 
     constructor()

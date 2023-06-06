@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.validation.annotation.Validated
 import java.util.*
-import java.util.stream.Collectors
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
@@ -88,7 +87,7 @@ class UserService {
             if (userInfoEntityOptional.isPresent) {
                 val userInfoEntity = userInfoEntityOptional.get()
                 return UserInfo(
-                    userInfoEntity.id, userInfoEntity.email,
+                    userInfoEntity.id!!, userInfoEntity.email!!,
                     userInfoEntity.fullName, userInfoEntity.avatarUrl
                 )
             }
@@ -103,7 +102,7 @@ class UserService {
             for (userInfoEntity in userInfoEntities) {
                 userInfos.add(
                     UserInfo(
-                        userInfoEntity!!.id, userInfoEntity.email,
+                        userInfoEntity!!.id!!, userInfoEntity.email!!,
                         userInfoEntity.fullName, userInfoEntity.avatarUrl
                     )
                 )
@@ -112,10 +111,11 @@ class UserService {
         }
 
     fun getUserTokens(userId: Long?): Set<String> {
-        return emptySet()
-//        val userTokens = userTokenRepository!!.findByUserId(userId) ?: return Collections.emptySet()
-//        return userTokens.stream()
-//            .map(UserTokenEntity::userToken)
-//            .collect(Collectors.toSet<String?>())
+        val userTokens = userTokenRepository!!.findByUserId(userId) ?: return emptySet()
+        val tokens: Set<String> = emptySet()
+        for (userToken in userTokens) {
+            tokens.plus(userToken!!.userToken)
+        }
+        return tokens
     }
 }
